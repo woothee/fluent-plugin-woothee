@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "fluent-plugin-woothee"
-  gem.version       = "0.0.1"
+  gem.version       = "0.0.2"
   gem.authors       = ["TAGOMORI Satoshi"]
   gem.email         = ["tagomoris@gmail.com"]
   gem.description   = %q{parsing by Project Woothee. See https://github.com/tagomoris/woothee }
@@ -15,8 +15,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_development_dependency "rake"
-  gem.add_development_dependency "fluentd"
-  gem.add_development_dependency "woothee", ">= 0.2.4"
   gem.add_runtime_dependency "fluentd"
   gem.add_runtime_dependency "woothee", ">= 0.2.4"
 end
