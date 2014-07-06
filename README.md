@@ -4,7 +4,7 @@
 
 'fluent-plugin-woothee' is a Fluentd plugin to parse UserAgent strings and to filter/drop specified categories of user terminals (like 'pc', 'smartphone' and so on).
 
-'woothee' is multi-language user-agent strings parser project. See: https://github.com/tagomoris/woothee
+'woothee' is multi-language user-agent strings parser project. See: https://github.com/woothee/woothee
 
 ## Configuration
 
