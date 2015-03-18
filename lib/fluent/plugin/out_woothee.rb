@@ -22,6 +22,7 @@ class Fluent::WootheeOutput < Fluent::Output
   config_param :out_key_name, :string, :default => 'agent_name'
   config_param :out_key_category, :string, :default => 'agent_category'
   config_param :out_key_os, :string, :default => 'agent_os'
+  config_param :out_key_os_version, :string, :default => nil # supress output
   config_param :out_key_version, :string, :default => nil # supress output
   config_param :out_key_vendor, :string, :default => nil # supress output
 
@@ -121,6 +122,7 @@ class Fluent::WootheeOutput < Fluent::Output
             @out_key_category => parsed[Woothee::ATTRIBUTE_CATEGORY].to_s,
             @out_key_os => parsed[Woothee::ATTRIBUTE_OS]
           })
+        record[@out_key_os_version] = parsed[Woothee::ATTRIBUTE_OS_VERSION] if @out_key_os_version
         record[@out_key_version] = parsed[Woothee::ATTRIBUTE_VERSION] if @out_key_version
         record[@out_key_vendor] = parsed[Woothee::ATTRIBUTE_VENDOR] if @out_key_vendor
       end

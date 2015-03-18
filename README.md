@@ -29,6 +29,7 @@ Output messages with tag 'merged.**' has attributes like 'agent\_name', 'agent\_
       out_key_name ua_name
       out_key_category ua_category
       out_key_os ua_os
+      out_key_os_version ua_os_version
       out_key_version ua_version
       out_key_vendor ua_vendor
     </match>
