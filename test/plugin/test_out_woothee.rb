@@ -28,6 +28,7 @@ merge_agent_info yes
 out_key_name ua_name
 out_key_category ua_category
 out_key_os ua_os
+out_key_os_version ua_os_version
 out_key_version ua_version
 out_key_vendor ua_vendor
 ]
@@ -39,6 +40,10 @@ key_name user_agent
 drop_categories crawler,misc
 tag selected
 ]
+
+  def setup
+    Fluent::Test.setup
+  end
 
   def create_driver(conf=CONFIG1,tag='test')
     Fluent::Test::OutputTestDriver.new(Fluent::WootheeOutput, tag).configure(conf)
@@ -85,6 +90,7 @@ tag selected
     assert_equal 'ua_name', d.instance.out_key_name
     assert_equal 'ua_category', d.instance.out_key_category
     assert_equal 'ua_os', d.instance.out_key_os
+    assert_equal 'ua_os_version', d.instance.out_key_os_version
     assert_equal 'ua_version', d.instance.out_key_version
     assert_equal 'ua_vendor', d.instance.out_key_vendor
 
@@ -250,11 +256,12 @@ tag selected
 
     # 'agent' => 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)'
     m = emits[0][2]
-    assert_equal 7, m.keys.size
+    assert_equal 8, m.keys.size
     assert_equal 0, m['value']
     assert_equal 'Internet Explorer', m['ua_name']
     assert_equal 'pc', m['ua_category']
     assert_equal 'Windows 8', m['ua_os']
+    assert_equal 'NT 6.2', m['ua_os_version']
     assert_equal 'Microsoft', m['ua_vendor']
     assert_equal '10.0', m['ua_version']
 
@@ -264,6 +271,7 @@ tag selected
     assert_equal 'Firefox', m['ua_name']
     assert_equal 'pc', m['ua_category']
     assert_equal 'Windows Vista', m['ua_os']
+    assert_equal 'NT 6.0', m['ua_os_version']
     assert_equal 'Mozilla', m['ua_vendor']
     assert_equal '9.0.1', m['ua_version']
 
@@ -273,6 +281,7 @@ tag selected
     assert_equal 'Firefox', m['ua_name']
     assert_equal 'pc', m['ua_category']
     assert_equal 'Linux', m['ua_os']
+    assert_equal 'UNKNOWN', m['ua_os_version']
     assert_equal 'Mozilla', m['ua_vendor']
     assert_equal '9.0.1', m['ua_version']
 
@@ -282,6 +291,7 @@ tag selected
     assert_equal 'Safari', m['ua_name']
     assert_equal 'smartphone', m['ua_category']
     assert_equal 'Android', m['ua_os']
+    assert_equal '3.1', m['ua_os_version']
     assert_equal 'Apple', m['ua_vendor']
     assert_equal '4.0', m['ua_version']
 
@@ -291,6 +301,7 @@ tag selected
     assert_equal 'docomo', m['ua_name']
     assert_equal 'mobilephone', m['ua_category']
     assert_equal 'docomo', m['ua_os']
+    assert_equal 'UNKNOWN', m['ua_os_version']
     assert_equal 'docomo', m['ua_vendor']
     assert_equal 'N505i', m['ua_version']
 
@@ -300,6 +311,7 @@ tag selected
     assert_equal 'PlayStation Vita', m['ua_name']
     assert_equal 'appliance', m['ua_category']
     assert_equal 'PlayStation Vita', m['ua_os']
+    assert_equal '1.51', m['ua_os_version']
     assert_equal 'Sony', m['ua_vendor']
     assert_equal 'UNKNOWN', m['ua_version']
   end
