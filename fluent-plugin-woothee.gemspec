@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "fluent-plugin-woothee"
-  gem.version       = "0.0.2"
+  gem.version       = "0.1.0"
   gem.authors       = ["TAGOMORI Satoshi"]
   gem.email         = ["tagomoris@gmail.com"]
   gem.description   = %q{parsing by Project Woothee. See https://github.com/woothee/woothee }
