@@ -36,6 +36,8 @@ drop_categories crawler,misc
 ]
 
   def setup
+    omit("Use fluentd v0.12 or later") unless defined?(Fluent::Filter)
+
     Fluent::Test.setup
   end
 
