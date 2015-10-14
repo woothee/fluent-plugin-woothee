@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{parsing by Project Woothee. See https://github.com/woothee/woothee }
   gem.summary       = %q{Fluentd plugin to parse UserAgent strings with woothee parser. It adds device information or filter records with specific device types.}
   gem.homepage      = "https://github.com/tagomoris/fluent-plugin-woothee"
-  gem.license       = "APLv2"
+  gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
