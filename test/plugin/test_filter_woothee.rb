@@ -126,7 +126,7 @@ drop_categories crawler,misc
     assert_equal 7, filtered[3][2]['value']
   end
 
-#   # through & merge
+  # through & merge
   def test_filter_through
     d = create_driver(CONFIG1, 'test.message')
     time = Time.parse('2012-07-20 16:40:30').to_i
@@ -204,7 +204,7 @@ drop_categories crawler,misc
     assert_equal 'UNKNOWN', m['agent_os']
   end
 
-#   # filter & merge
+  # filter & merge
   def test_filter_stream
     d = create_driver(CONFIG2, 'test.message')
     time = Time.parse('2012-07-20 16:40:30').to_i
@@ -286,7 +286,7 @@ drop_categories crawler,misc
     assert_equal 'UNKNOWN', m['ua_version']
   end
 
-#   # drop & non-merge
+  # drop & non-merge
   def test_filter_drop
     d = create_driver(CONFIG3, 'test.message')
     time = Time.parse('2012-07-20 16:40:30').to_i
