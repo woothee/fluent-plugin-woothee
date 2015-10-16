@@ -45,57 +45,65 @@ drop_categories crawler,misc
     Fluent::Test::FilterTestDriver.new(Fluent::WootheeFilter, tag).configure(conf)
   end
 
-  def test_configure
-    # fast_crawler_filter
-    d = create_driver CONFIG0
-    assert_equal true, d.instance.fast_crawler_filter_mode
-    assert_equal 'useragent', d.instance.key_name
+  class TestConfigure < self
+    def test_fast_crawer_filter
+      # fast_crawler_filter
+      d = create_driver CONFIG0
+      assert_equal true, d.instance.fast_crawler_filter_mode
+      assert_equal 'useragent', d.instance.key_name
+    end
 
-    # through & merge
-    d = create_driver CONFIG1
-    assert_equal false, d.instance.fast_crawler_filter_mode
-    assert_equal 'agent', d.instance.key_name
+    def test_through_and_merge
+      # through & merge
+      d = create_driver CONFIG1
+      assert_equal false, d.instance.fast_crawler_filter_mode
+      assert_equal 'agent', d.instance.key_name
 
-    assert_equal 0, d.instance.filter_categories.size
-    assert_equal 0, d.instance.drop_categories.size
-    assert_equal :through, d.instance.mode
+      assert_equal 0, d.instance.filter_categories.size
+      assert_equal 0, d.instance.drop_categories.size
+      assert_equal :through, d.instance.mode
 
-    assert_equal true, d.instance.merge_agent_info
-    assert_equal 'agent_name', d.instance.out_key_name
-    assert_equal 'agent_category', d.instance.out_key_category
-    assert_equal 'agent_os', d.instance.out_key_os
-    assert_nil d.instance.out_key_version
-    assert_nil d.instance.out_key_vendor
+      assert_equal true, d.instance.merge_agent_info
+      assert_equal 'agent_name', d.instance.out_key_name
+      assert_equal 'agent_category', d.instance.out_key_category
+      assert_equal 'agent_os', d.instance.out_key_os
+      assert_nil d.instance.out_key_version
+      assert_nil d.instance.out_key_vendor
+    end
 
-    # filter & merge
-    d = create_driver CONFIG2
-    assert_equal false, d.instance.fast_crawler_filter_mode
-    assert_equal 'agent', d.instance.key_name
+    def test_filter_and_merge
+      # filter & merge
+      d = create_driver CONFIG2
+      assert_equal false, d.instance.fast_crawler_filter_mode
+      assert_equal 'agent', d.instance.key_name
 
-    assert_equal 4, d.instance.filter_categories.size
-    assert_equal [:pc,:smartphone,:mobilephone,:appliance], d.instance.filter_categories
-    assert_equal 0, d.instance.drop_categories.size
-    assert_equal :filter, d.instance.mode
+      assert_equal 4, d.instance.filter_categories.size
+      assert_equal [:pc,:smartphone,:mobilephone,:appliance], d.instance.filter_categories
+      assert_equal 0, d.instance.drop_categories.size
+      assert_equal :filter, d.instance.mode
 
-    assert_equal true, d.instance.merge_agent_info
-    assert_equal 'ua_name', d.instance.out_key_name
-    assert_equal 'ua_category', d.instance.out_key_category
-    assert_equal 'ua_os', d.instance.out_key_os
-    assert_equal 'ua_os_version', d.instance.out_key_os_version
-    assert_equal 'ua_version', d.instance.out_key_version
-    assert_equal 'ua_vendor', d.instance.out_key_vendor
+      assert_equal true, d.instance.merge_agent_info
+      assert_equal 'ua_name', d.instance.out_key_name
+      assert_equal 'ua_category', d.instance.out_key_category
+      assert_equal 'ua_os', d.instance.out_key_os
+      assert_equal 'ua_os_version', d.instance.out_key_os_version
+      assert_equal 'ua_version', d.instance.out_key_version
+      assert_equal 'ua_vendor', d.instance.out_key_vendor
+    end
 
-    # drop & non-merge
-    d = create_driver CONFIG3
-    assert_equal false, d.instance.fast_crawler_filter_mode
-    assert_equal 'user_agent', d.instance.key_name
+    def test_drop_and_non_merge
+      # drop & non-merge
+      d = create_driver CONFIG3
+      assert_equal false, d.instance.fast_crawler_filter_mode
+      assert_equal 'user_agent', d.instance.key_name
 
-    assert_equal 0, d.instance.filter_categories.size
-    assert_equal 2, d.instance.drop_categories.size
-    assert_equal [:crawler,:misc], d.instance.drop_categories
-    assert_equal :drop, d.instance.mode
+      assert_equal 0, d.instance.filter_categories.size
+      assert_equal 2, d.instance.drop_categories.size
+      assert_equal [:crawler,:misc], d.instance.drop_categories
+      assert_equal :drop, d.instance.mode
 
-    assert_equal false, d.instance.merge_agent_info
+      assert_equal false, d.instance.merge_agent_info
+    end
   end
 
   def test_filter_fast_crawler_filter_stream
