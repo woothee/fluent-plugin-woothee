@@ -47,14 +47,12 @@ drop_categories crawler,misc
 
   class TestConfigure < self
     def test_fast_crawer_filter
-      # fast_crawler_filter
       d = create_driver CONFIG0
       assert_equal true, d.instance.fast_crawler_filter_mode
       assert_equal 'useragent', d.instance.key_name
     end
 
     def test_through_and_merge
-      # through & merge
       d = create_driver CONFIG1
       assert_equal false, d.instance.fast_crawler_filter_mode
       assert_equal 'agent', d.instance.key_name
@@ -72,7 +70,6 @@ drop_categories crawler,misc
     end
 
     def test_filter_and_merge
-      # filter & merge
       d = create_driver CONFIG2
       assert_equal false, d.instance.fast_crawler_filter_mode
       assert_equal 'agent', d.instance.key_name
@@ -92,7 +89,6 @@ drop_categories crawler,misc
     end
 
     def test_drop_and_non_merge
-      # drop & non-merge
       d = create_driver CONFIG3
       assert_equal false, d.instance.fast_crawler_filter_mode
       assert_equal 'user_agent', d.instance.key_name
