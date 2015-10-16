@@ -213,14 +213,14 @@ drop_categories crawler,misc
     d = create_driver(CONFIG2, 'test.message')
     time = Time.parse('2012-07-20 16:40:30').to_i
     d.run do
-      d.emit({'value' => 0, 'agent' => 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)'}, time)
-      d.emit({'value' => 1, 'agent' => 'Mozilla/5.0 (Windows NT 6.0; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
-      d.emit({'value' => 2, 'agent' => 'Mozilla/5.0 (Ubuntu; X11; Linux i686; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
-      d.emit({'value' => 3, 'agent' => 'Mozilla/5.0 (Linux; U; Android 3.1; ja-jp; L-06C Build/HMJ37) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13'}, time)
-      d.emit({'value' => 4, 'agent' => 'DoCoMo/1.0/N505i/c20/TB/W24H12'}, time)
-      d.emit({'value' => 5, 'agent' => 'Mozilla/5.0 (PlayStation Vita 1.51) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'}, time)
-      d.emit({'value' => 6, 'agent' => 'Mozilla/5.0 (compatible; Google Desktop/5.9.1005.12335; http://desktop.google.com/)'}, time)
-      d.emit({'value' => 7, 'agent' => 'msnbot/1.1 (+http://search.msn.com/msnbot.htm)'}, time)
+      d.filter({'value' => 0, 'agent' => 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)'}, time)
+      d.filter({'value' => 1, 'agent' => 'Mozilla/5.0 (Windows NT 6.0; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
+      d.filter({'value' => 2, 'agent' => 'Mozilla/5.0 (Ubuntu; X11; Linux i686; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
+      d.filter({'value' => 3, 'agent' => 'Mozilla/5.0 (Linux; U; Android 3.1; ja-jp; L-06C Build/HMJ37) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13'}, time)
+      d.filter({'value' => 4, 'agent' => 'DoCoMo/1.0/N505i/c20/TB/W24H12'}, time)
+      d.filter({'value' => 5, 'agent' => 'Mozilla/5.0 (PlayStation Vita 1.51) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'}, time)
+      d.filter({'value' => 6, 'agent' => 'Mozilla/5.0 (compatible; Google Desktop/5.9.1005.12335; http://desktop.google.com/)'}, time)
+      d.filter({'value' => 7, 'agent' => 'msnbot/1.1 (+http://search.msn.com/msnbot.htm)'}, time)
     end
 
     filtered = d.filtered_as_array
@@ -295,14 +295,14 @@ drop_categories crawler,misc
     d = create_driver(CONFIG3, 'test.message')
     time = Time.parse('2012-07-20 16:40:30').to_i
     d.run do
-      d.emit({'value' => 0, 'user_agent' => 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)'}, time)
-      d.emit({'value' => 1, 'user_agent' => 'Mozilla/5.0 (Windows NT 6.0; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
-      d.emit({'value' => 2, 'user_agent' => 'Mozilla/5.0 (Ubuntu; X11; Linux i686; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
-      d.emit({'value' => 3, 'user_agent' => 'Mozilla/5.0 (Linux; U; Android 3.1; ja-jp; L-06C Build/HMJ37) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13'}, time)
-      d.emit({'value' => 4, 'user_agent' => 'DoCoMo/1.0/N505i/c20/TB/W24H12'}, time)
-      d.emit({'value' => 5, 'user_agent' => 'Mozilla/5.0 (PlayStation Vita 1.51) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'}, time)
-      d.emit({'value' => 6, 'user_agent' => 'Mozilla/5.0 (compatible; Google Desktop/5.9.1005.12335; http://desktop.google.com/)'}, time)
-      d.emit({'value' => 7, 'user_agent' => 'msnbot/1.1 (+http://search.msn.com/msnbot.htm)'}, time)
+      d.filter({'value' => 0, 'user_agent' => 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)'}, time)
+      d.filter({'value' => 1, 'user_agent' => 'Mozilla/5.0 (Windows NT 6.0; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
+      d.filter({'value' => 2, 'user_agent' => 'Mozilla/5.0 (Ubuntu; X11; Linux i686; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}, time)
+      d.filter({'value' => 3, 'user_agent' => 'Mozilla/5.0 (Linux; U; Android 3.1; ja-jp; L-06C Build/HMJ37) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13'}, time)
+      d.filter({'value' => 4, 'user_agent' => 'DoCoMo/1.0/N505i/c20/TB/W24H12'}, time)
+      d.filter({'value' => 5, 'user_agent' => 'Mozilla/5.0 (PlayStation Vita 1.51) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'}, time)
+      d.filter({'value' => 6, 'user_agent' => 'Mozilla/5.0 (compatible; Google Desktop/5.9.1005.12335; http://desktop.google.com/)'}, time)
+      d.filter({'value' => 7, 'user_agent' => 'msnbot/1.1 (+http://search.msn.com/msnbot.htm)'}, time)
     end
 
     filtered = d.filtered_as_array
