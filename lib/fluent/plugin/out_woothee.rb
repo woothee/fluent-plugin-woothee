@@ -2,6 +2,11 @@ class Fluent::WootheeOutput < Fluent::Output
   Fluent::Plugin.register_output('woothee', self)
   Fluent::Plugin.register_output('woothee_fast_crawler_filter', self)
 
+  # Define `router` method of v0.12 to support v0.10 or earlier
+  unless method_defined?(:router)
+    define_method("router") { Fluent::Engine }
+  end
+
   config_param :tag, :string, :default => nil
   config_param :remove_prefix, :string, :default => nil
   config_param :add_prefix, :string, :default => nil
@@ -103,7 +108,7 @@ class Fluent::WootheeOutput < Fluent::Output
   def fast_crawler_filter_emit(tag, es)
     es.each do |time,record|
       unless Woothee.is_crawler(record[@key_name] || '')
-        Fluent::Engine.emit(tag, time, record)
+        router.emit(tag, time, record)
       end
     end
   end
@@ -126,7 +131,7 @@ class Fluent::WootheeOutput < Fluent::Output
         record[@out_key_version] = parsed[Woothee::ATTRIBUTE_VERSION] if @out_key_version
         record[@out_key_vendor] = parsed[Woothee::ATTRIBUTE_VENDOR] if @out_key_vendor
       end
-      Fluent::Engine.emit(tag, time, record)
+      router.emit(tag, time, record)
     end
   end
 
