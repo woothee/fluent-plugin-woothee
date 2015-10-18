@@ -23,6 +23,7 @@ unless ENV.has_key?('VERBOSE')
 end
 
 require 'fluent/plugin/out_woothee'
+require 'fluent/plugin/filter_woothee'
 
 class Test::Unit::TestCase
 end
