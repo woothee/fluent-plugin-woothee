@@ -7,16 +7,6 @@ class Fluent::WootheeOutput < Fluent::Output
 
   helpers :event_emitter
 
-  # Define `router` method of v0.12 to support v0.10 or earlier
-  unless method_defined?(:router)
-    define_method("router") { Fluent::Engine }
-  end
-
-  # Define `log` method for v0.10.42 or earlier
-  unless method_defined?(:log)
-    define_method("log") { $log }
-  end
-
   config_param :tag, :string, :default => nil
   config_param :remove_prefix, :string, :default => nil
   config_param :add_prefix, :string, :default => nil
