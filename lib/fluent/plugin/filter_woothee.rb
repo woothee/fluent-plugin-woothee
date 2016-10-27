@@ -1,4 +1,7 @@
-class Fluent::WootheeFilter < Fluent::Filter
+require 'fluent/plugin/filter'
+require 'woothee'
+
+class Fluent::Plugin::WootheeFilter < Fluent::Plugin::Filter
   Fluent::Plugin.register_filter('woothee', self)
   Fluent::Plugin.register_filter('woothee_fast_crawler_filter', self)
 
@@ -24,7 +27,6 @@ class Fluent::WootheeFilter < Fluent::Filter
 
   def initialize
     super
-    require 'woothee'
   end
 
   def configure(conf)
@@ -104,4 +106,4 @@ class Fluent::WootheeFilter < Fluent::Filter
       normal_filter_stream(tag, es)
     end
   end
-end if defined?(Fluent::Filter)
+end
