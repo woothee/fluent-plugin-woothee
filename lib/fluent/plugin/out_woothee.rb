@@ -1,16 +1,11 @@
+require 'fluent/plugin/output'
+require 'woothee'
+
 class Fluent::WootheeOutput < Fluent::Output
   Fluent::Plugin.register_output('woothee', self)
   Fluent::Plugin.register_output('woothee_fast_crawler_filter', self)
 
-  # Define `router` method of v0.12 to support v0.10 or earlier
-  unless method_defined?(:router)
-    define_method("router") { Fluent::Engine }
-  end
-
-  # Define `log` method for v0.10.42 or earlier
-  unless method_defined?(:log)
-    define_method("log") { $log }
-  end
+  helpers :event_emitter
 
   config_param :tag, :string, :default => nil
   config_param :remove_prefix, :string, :default => nil
@@ -38,7 +33,6 @@ class Fluent::WootheeOutput < Fluent::Output
 
   def initialize
     super
-    require 'woothee'
   end
 
   def configure(conf)
@@ -66,7 +60,7 @@ class Fluent::WootheeOutput < Fluent::Output
       if @filter_categories.size > 0 or @drop_categories.size > 0 or @merge_agent_info
         raise Fluent::ConfigError, "fast_crawler_filter cannot be specified with filter/drop/merge options"
       end
-      
+
       return
     end
 
@@ -98,7 +92,7 @@ class Fluent::WootheeOutput < Fluent::Output
       if @remove_prefix and
           ( (tag.start_with?(@removed_prefix_string) and tag.length > @removed_length) or tag == @remove_prefix)
         tag = tag[@removed_length..-1]
-      end 
+      end
       if @add_prefix
         tag = if tag and tag.length > 0
                 @added_prefix_string + tag
@@ -140,7 +134,7 @@ class Fluent::WootheeOutput < Fluent::Output
     end
   end
 
-  def emit(tag, es, chain)
+  def process(tag, es)
     tag = tag_mangle(tag)
 
     if @fast_crawler_filter_mode
@@ -148,7 +142,5 @@ class Fluent::WootheeOutput < Fluent::Output
     else
       normal_emit(tag, es)
     end
-
-    chain.next
   end
 end
