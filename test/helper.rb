@@ -22,7 +22,6 @@ unless ENV.has_key?('VERBOSE')
   $log = nulllogger
 end
 
-require 'fluent/plugin/out_woothee'
 require 'fluent/plugin/filter_woothee'
 
 class Test::Unit::TestCase
