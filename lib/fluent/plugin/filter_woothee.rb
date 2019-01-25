@@ -82,21 +82,23 @@ class Fluent::Plugin::WootheeFilter < Fluent::Plugin::Filter
   end
 
   def filter_standard(tag, time, record)
-    parsed = Woothee.parse(record[@key_name] || '')
+    if record[@key_name]
+      parsed = Woothee.parse(record[@key_name] || '')
 
-    category = parsed[Woothee::ATTRIBUTE_CATEGORY]
-    return nil if @mode == :filter && !@filter_categories.include?(category)
-    return nil if @mode == :drop && @drop_categories.include?(category)
+      category = parsed[Woothee::ATTRIBUTE_CATEGORY]
+      return nil if @mode == :filter && !@filter_categories.include?(category)
+      return nil if @mode == :drop && @drop_categories.include?(category)
 
-    if @merge_agent_info
-      record = record.merge({
-          @out_key_name => parsed[Woothee::ATTRIBUTE_NAME],
-          @out_key_category => parsed[Woothee::ATTRIBUTE_CATEGORY].to_s,
-          @out_key_os => parsed[Woothee::ATTRIBUTE_OS]
-      })
-      record[@out_key_os_version] = parsed[Woothee::ATTRIBUTE_OS_VERSION] if @out_key_os_version
-      record[@out_key_version] = parsed[Woothee::ATTRIBUTE_VERSION] if @out_key_version
-      record[@out_key_vendor] = parsed[Woothee::ATTRIBUTE_VENDOR] if @out_key_vendor
+      if @merge_agent_info
+        record = record.merge({
+            @out_key_name => parsed[Woothee::ATTRIBUTE_NAME],
+            @out_key_category => parsed[Woothee::ATTRIBUTE_CATEGORY].to_s,
+            @out_key_os => parsed[Woothee::ATTRIBUTE_OS]
+        })
+        record[@out_key_os_version] = parsed[Woothee::ATTRIBUTE_OS_VERSION] if @out_key_os_version
+        record[@out_key_version] = parsed[Woothee::ATTRIBUTE_VERSION] if @out_key_version
+        record[@out_key_vendor] = parsed[Woothee::ATTRIBUTE_VENDOR] if @out_key_vendor
+      end
     end
     record
   end
